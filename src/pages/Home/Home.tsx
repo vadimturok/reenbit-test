@@ -7,6 +7,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import Loader from '../../components/Loader/Loader'
 import {filterByName, orderCharacters} from "../../utils";
 import {setFilteredCharacters} from "../../store/reducers/characters/charactersSlice";
+import Login from "../../components/Login/Login";
 
 
 const Home = () => {
@@ -27,11 +28,13 @@ const Home = () => {
         dispatch(setFilteredCharacters({characters: orderCharacters(
             filterByName(e.target.value, characters)), value: e.target.value}))
     }
+
     return (
         <div className={styles.home}>
             {
                 error ? <div>Error...</div> : (isLoading || !filteredCharacters) ? <Loader/> :
                     <>
+                        <Login/>
                         <img className={styles.homeImage} src={HomeImage} alt="Home"/>
                         <InputField value={value} onChange={onInputChange}/>
                         <CharacterList characters={filteredCharacters}/>
